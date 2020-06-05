@@ -45,7 +45,7 @@ namespace EFDataAccessLibrary.Models
             return "Updated successfully";
         }
 
-        public string DeleteTransactionDisc(DccuInfo objDisc)
+        public string DeleteTransactionDisc(DiscInfo objDisc)
         {
             _db.Remove(objDisc);
             _db.SaveChanges();
