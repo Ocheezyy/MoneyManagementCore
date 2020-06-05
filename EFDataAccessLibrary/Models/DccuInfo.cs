@@ -20,10 +20,10 @@ namespace EFDataAccessLibrary.Models
         public string Memo { get; set; }
         [MaxLength(20)]
         public string Amount_Debit { get; set; }
-        public double Amount_Credit { get; set; }
+        //public double Amount_Credit { get; set; }
         public double Balance { get; set; }
-        [MaxLength(10)]
-        public string Check_Number { get; set; }
+        //[MaxLength(10)]
+        //public string Check_Number { get; set; }
         [MaxLength(30)]
         public string Fees { get; set; }
         public double Principal { get; set; }

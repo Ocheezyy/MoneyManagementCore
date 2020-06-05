@@ -31,9 +31,9 @@ namespace EFDataAccessLibrary.Models
         }
 
         //Search for transaction
-        public DccuInfo GetTransactionDccu(int id)
+        public DccuInfo GetTransactionDccu(string TxNumber)
         {
-            var dccu = _db.Dccus.FirstOrDefault(s => s.Id == id);
+            var dccu = _db.Dccus.FirstOrDefault(s => s.Transaction_Number == TxNumber);
             return dccu;
         }
 

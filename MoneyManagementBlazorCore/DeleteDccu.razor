@@ -47,13 +47,13 @@
 
 @code {
     [Parameter]
-    public int CurrentID { get; set; }
+    public string CurrentID { get; set; }
 
     DccuInfo objDccu = new DccuInfo();
 
     protected override async Task OnInitializedAsync()
     {
-        objDccu = await Task.Run(() => ObjDccuService.GetAllDccu().First(d => d.Id == CurrentID));
+        objDccu = await Task.Run(() => ObjDccuService.GetAllDccu().First(d => d.Transaction_Number == CurrentID));
     }
 
     protected void DeleteTransaction()

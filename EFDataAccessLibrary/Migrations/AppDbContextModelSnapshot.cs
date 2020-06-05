@@ -19,7 +19,7 @@ namespace EFDataAccessLibrary.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("EFDataAccessLibrary.Models.Dccu", b =>
+            modelBuilder.Entity("EFDataAccessLibrary.Models.DccuInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,38 +30,44 @@ namespace EFDataAccessLibrary.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Amount_Debit")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<double>("Balance")
                         .HasColumnType("float");
 
                     b.Property<string>("Check_Number")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
 
                     b.Property<string>("Fees")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("Memo")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
 
                     b.Property<double>("Principal")
                         .HasColumnType("float");
 
                     b.Property<string>("Transaction_Number")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
 
                     b.HasKey("Id");
 
                     b.ToTable("Dccus");
                 });
 
-            modelBuilder.Entity("EFDataAccessLibrary.Models.Disc", b =>
+            modelBuilder.Entity("EFDataAccessLibrary.Models.DiscInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -75,7 +81,8 @@ namespace EFDataAccessLibrary.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<DateTime>("Post_Date")
                         .HasColumnType("datetime2");
