@@ -1,0 +1,59 @@
+﻿@page "/dccu"
+@using EFDataAccessLibrary.Models;
+@using Microsoft.AspNetCore.Components.Routing;
+@inject DccuService ObjDccuService
+
+<NavLink class="nav-link" href="AddTransactionDccu">
+    <span aria-hidden="true"></span>Add New
+</NavLink>
+
+<h1>Employee Information</h1>
+@if (objDccu == null)
+{
+    <p><em>Loading....</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tx Number</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Memo</th>
+                <th>Amount</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tx in objDccu)
+            {
+                <tr>
+                    <td>@tx.Transaction_Number</td>
+                    <td>@tx.Date</td>
+                    <td>@tx.Description</td>
+                    <td>@tx.Memo</td>
+                    <td>@tx.Amount_Debit</td>
+                    <td>@tx.Balance</td>
+                    <td>
+                        <a class="nav-link" href="EditDccu/@tx.Transaction_Number">
+                            <span class="io io-pencil" aria-hidden="true"></span>Edit
+                        </a>
+                        <a class="nav-link" href="DeleteDccu/@tx.Transaction_Number">
+                            <span class="io io-trash" aria-hidden="true"></span>Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    List<DccuInfo> objDccu;
+    protected override async Task OnInitializedAsync()
+    {
+        objDccu = await Task.Run(() => ObjDccuService.GetAllDccu());
+    }
+
+}

@@ -1,0 +1,58 @@
+﻿@page "/adddisc"
+@using EFDataAccessLibrary.Models;
+@using Microsoft.AspNetCore.Components.Routing;
+@inject DiscService ObjDiscService
+@inject NavigationManager NavigationManager
+
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="DateInp" class="control-label"></label>
+                <input form="Date" class="form-control" @bind="@objDisc.Trans_Date" id="DateInp" />
+            </div>
+            <div class="form-group">
+                <label for="CategoryInp" class="control-label"></label>
+                <select @bind="@objDisc.Category" class="form-control" id="CategoryInp">
+                    <option>---Select Description---</option>
+                      
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="DescriptionInp" class="control-label"></label>
+                <input form="Memo" class="form-control" @bind="@objDisc.Description" id="DescriptionInp" />
+            </div>
+            <div class="form-group">
+                <label for="AmountInp" class="control-label"></label>
+                <input form="Amount" class="form-control" @bind="@objDisc.Amount" id="AmountInp" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="button" class="btn btn-primary" @onclick="@CreateTransaction" value="Save" />
+                <input type="button" class="btn btn-danger" @onclick="@Cancel" value="Cancel" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+@code
+{
+    DiscInfo objDisc = new DiscInfo();
+
+    protected void CreateTransaction()
+    {
+        ObjDiscService.CreateDisc(objDisc);
+        NavigationManager.NavigateTo("dccu");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("dccu");
+    }
+}
+

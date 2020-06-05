@@ -1,0 +1,57 @@
+﻿@page "/disc"
+@using EFDataAccessLibrary.Models;
+@using Microsoft.AspNetCore.Components.Routing;
+@inject DiscService ObjDiscService
+
+<NavLink class="nav-link" href="AddTransactionDccu">
+    <span aria-hidden="true"></span>Add New
+</NavLink>
+
+<h1>Employee Information</h1>
+@if (objDisc == null)
+{
+    <p><em>Loading....</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tx Number</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tx in objDisc)
+            {
+                <tr>
+                    <td>@tx.Id</td>
+                    <td>@tx.Trans_Date</td>
+                    <td>@tx.Description</td>
+                    <td>@tx.Amount</td>
+                    <td>@tx.Category</td>
+                    <td>
+                        <a class="nav-link" href="EditDccu/@tx.Id">
+                            <span class="io io-pencil" aria-hidden="true"></span>Edit
+                        </a>
+                        <a class="nav-link" href="DeleteDccu/@tx.Id">
+                            <span class="io io-trash" aria-hidden="true"></span>Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    List<DiscInfo> objDisc;
+    protected override async Task OnInitializedAsync()
+    {
+        objDisc = await Task.Run(() => ObjDiscService.GetAllDisc());
+    }
+
+}

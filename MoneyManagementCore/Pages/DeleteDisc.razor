@@ -1,0 +1,60 @@
+﻿@page "/DeleteEmployee/{CurrentID}"
+@using EFDataAccessLibrary.Models;
+@inject DiscService ObjDiscService
+@inject NavigationManager NavigationManager
+
+<h2>Delete Transaction</h2>
+<hr />
+<h3>Are you sure?</h3>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="form-group">
+            <label>Employee ID:</label>
+            <label>@objDisc.Id</label>
+        </div>
+        <div class="form-group">
+            <label>Category:</label>
+            <label>@objDisc.Category</label>
+        </div>
+        <div class="form-group">
+            <label>Description:</label>
+            <label>@objDisc.Description</label>
+        </div>
+        <div class="form-group">
+            <label>Amount:</label>
+            <label>@objDisc.Amount</label>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <button class="btn btn-danger" @onclick="@DeleteTransaction">Delete</button>
+            <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+        public string CurrentID { get; set; }
+        DiscInfo objDisc = new DiscInfo();
+
+    //protected override Task OnInitializedAsync()
+    //{
+        //objDisc = await Task.Run(()=>objDisc.)
+    //}
+
+    protected void DeleteTransaction()
+    {
+        ObjDiscService.DeleteTransactionDisc(objDisc);
+        NavigationManager.NavigateTo("disc");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("disc");
+    }
+
+}
