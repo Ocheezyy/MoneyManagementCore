@@ -60,6 +60,7 @@ namespace MoneyManagementCore
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapBlazorHub();
             });
         }
     }

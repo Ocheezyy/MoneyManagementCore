@@ -1,5 +1,6 @@
-﻿@page "/DeleteEmployee/{CurrentID}"
+﻿@page "/DeleteDccu/{CurrentID}"
 @using EFDataAccessLibrary.Models;
+@using System.Security.Cryptography.X509Certificates
 @inject DccuService ObjDccuService
 @inject NavigationManager NavigationManager
 
@@ -38,32 +39,32 @@
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
-            <input type="button" class="btn btn-danger" @onclick="@DeleteTransaction" value="Delete" />
-            <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
+            <input type="button" class="btn btn-danger" @onclick="DeleteTransaction" value="Delete" />
+            <input type="button" class="btn btn-primary" @onclick="Cancel" value="Cancel" />
         </div>
     </div>
 </div>
 
 @code {
     [Parameter]
-    public string CurrentID { get; set; }
+    public int CurrentID { get; set; }
 
     DccuInfo objDccu = new DccuInfo();
 
-    //protected override Task OnInitializedAsync()
-    //{
-    //objDisc = await Task.Run(()=>objDisc.)
-    //}
+    protected override async Task OnInitializedAsync()
+    {
+        objDccu = await Task.Run(() => ObjDccuService.GetAllDccu().First(d => d.Id == CurrentID));
+    }
 
     protected void DeleteTransaction()
     {
         ObjDccuService.DeleteTransactionDccu(objDccu);
-        NavigationManager.NavigateTo("dccu");
+        NavigationManager.NavigateTo("Dccu");
     }
 
     void Cancel()
     {
-        NavigationManager.NavigateTo("dccu");
+        NavigationManager.NavigateTo("Dccu");
     }
 
 }

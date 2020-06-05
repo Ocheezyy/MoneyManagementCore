@@ -12,7 +12,7 @@ namespace EFDataAccessLibrary.Models
 
         public DccuService(AppDbContext db)
         {
-            db = _db;
+            _db = db;
         }
 
         // Get all transactions

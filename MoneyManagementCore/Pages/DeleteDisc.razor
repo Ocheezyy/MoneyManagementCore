@@ -1,4 +1,4 @@
-﻿@page "/DeleteEmployee/{CurrentID}"
+﻿@page "/DeleteDisc/{CurrentID}"
 @using EFDataAccessLibrary.Models;
 @inject DiscService ObjDiscService
 @inject NavigationManager NavigationManager
@@ -30,31 +30,31 @@
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
-            <button class="btn btn-danger" @onclick="@DeleteTransaction">Delete</button>
-            <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
+            <input type="button" class="btn btn-danger" @onclick="DeleteTransaction">Delete</input>
+            <input type="button" class="btn btn-primary" @onclick="Cancel" value="Cancel" />
         </div>
     </div>
 </div>
 
 @code {
         
-        public string CurrentID { get; set; }
+        public int CurrentID { get; set; }
         DiscInfo objDisc = new DiscInfo();
 
     protected override async Task OnInitializedAsync()
     {
-        objDisc = await Task.Run(() => ObjDiscService.DeleteTransactionDisc((objDisc)));
+        objDisc = await Task.Run(() => ObjDiscService.GetAllDisc().First(d =>d.Id == CurrentID));
     }
 
     protected void DeleteTransaction()
     {
         ObjDiscService.DeleteTransactionDisc(objDisc);
-        NavigationManager.NavigateTo("disc", true);
+        NavigationManager.NavigateTo("Disc", true);
     }
 
     void Cancel()
     {
-        NavigationManager.NavigateTo("disc", true);
+        NavigationManager.NavigateTo("Disc", true);
     }
 
 }
