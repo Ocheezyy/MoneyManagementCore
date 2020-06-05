@@ -1,5 +1,6 @@
 ﻿@page
 @model IndexModel
+@using Microsoft.AspNetCore.Components.Routing;
 @{
     ViewData["Title"] = "Home page";
 }
@@ -9,6 +10,9 @@
         <h1 class="display-4">Welcome</h1>
         <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     </div>
+    <NavLink class="nav-link" href="Dccu" >
+        <span></span>Link
+    </NavLink>
     <div id="Table">
         
     </div>

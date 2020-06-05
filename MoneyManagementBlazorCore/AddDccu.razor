@@ -1,0 +1,72 @@
+﻿@page "/AddDccu"
+@using EFDataAccessLibrary.Models
+@inject DccuService ObjDccuService
+@inject NavigationManager NavigationManager
+
+<h2>Add Transaction Manually</h2>
+<hr />
+
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="TxNumberInp" class="control-label"></label>
+                <input form="TxNumber" class="form-control" @bind="@objDccu.Transaction_Number" id="TxNumberInp" />
+            </div>
+            <div class="form-group">
+                <label for="DateInp" class="control-label"></label>
+                <input form="Date" class="form-control" @bind="@objDccu.Date" id="DateInp" />
+            </div>
+            <div class="form-group">
+                <label for="DescriptionInp" class="control-label"></label>
+                <select @bind="@objDccu.Description" class="form-control" id="DescriptionInp">
+                    <option>---Select Description---</option>
+                    <option>ACH Deposit</option>
+                    <option>ACH Withdrawal</option>
+                    <option>Check Card Purchase</option>
+                    <option>Check Card Refund</option>
+                    <option>Online Payment</option>
+                    <option>Online Transfer</option>
+                    <option>POS Purchase</option>
+                    <option>POS Refund</option>
+                    <option>Withdrawal Fee</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="MemoInp" class="control-label"></label>
+                <input form="Memo" class="form-control" @bind="@objDccu.Memo" id="MemoInp"/>
+            </div>
+            <div class="form-group">
+                <label for="AmountInp" class="control-label"></label>
+                <input form="Amount" class="form-control" @bind="@objDccu.Amount_Debit" id="AmountInp"/>
+            </div>
+            <div class="form-group">
+                <label for="BalanceInp" class="control-label"></label>
+                <input form="Balance" class="form-control" @bind="@objDccu.Balance" id="BalanceInp" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="button" class="btn btn-primary" @onclick="CreateTransaction" value="Save" />
+                <input type="button" class="btn btn-danger" @onclick="Cancel" value="Cancel" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@code {
+    DccuInfo objDccu = new DccuInfo();
+
+    protected void CreateTransaction()
+    {
+        ObjDccuService.CreateDccu(objDccu);
+        NavigationManager.NavigateTo("Dccu");
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("Dccu");
+    }
+}
